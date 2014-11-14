@@ -17,8 +17,6 @@ public class DisruptorTest {
 		for(int i = 0; i < 100; i++){
 			h.produce(new String("1234"));
 		}
-		
-		
 		System.in.read();
 	}
 
