@@ -35,7 +35,7 @@ public class DetectionServer {
 			//监听port端口
 			ServerSocket server = new ServerSocket(port);
 			logger.info("***** server socket started *****");
-			logger.info("port:" + this.port);
+			logger.info("listenint port:" + this.port);
 			//阻塞
 			socket = server.accept();
 			while(true){
