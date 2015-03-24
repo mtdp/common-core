@@ -13,6 +13,11 @@
 	  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 	  http://www.springframework.org/schema/context   
       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+      
+      <!-- 
+      	说明通用可以将本配置移至对应的war工程
+       -->
+      
 	
 		   <!-- 采用注释的方式配置bean -->   
 	       <context:annotation-config />   
