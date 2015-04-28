@@ -59,6 +59,8 @@
 	<apache.poi.version>3.8</apache.poi.version>
 	<!-- pinyin4j  -->
 	<pinyin4j.version>2.5.0</pinyin4j.version>
+	<!-- jxls excel导出工具 -->
+	<apache.jxls.version>1.0</apache.jxls.version>
   </properties>
   <build>
     <finalName>common-core</finalName>
@@ -330,6 +332,17 @@
 	   <artifactId>poi-ooxml-schemas</artifactId>
 	   <version>${apache.poi.version}</version>
 	</dependency>
+	<!-- apache jxls -->
+    <dependency>
+      <groupId>net.sf.jxls</groupId>
+      <artifactId>jxls-core</artifactId>
+      <version>${apache.jxls.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.jxls</groupId>
+      <artifactId>jxls-reader</artifactId>
+      <version>${apache.jxls.version}</version>
+    </dependency>
     <!-- end apache commons-->
     <!-- 
              第三方提供需要自己deploy自己的仓库
