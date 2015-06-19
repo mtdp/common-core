@@ -24,7 +24,16 @@ public class DateUtil {
 	/** 格式yyyyMMdd **/
 	public static String DATE_PATTERN_2 = "yyyyMMdd";
 	
-	
+	/**
+	 * 获取当前时间格式为 yyyyMMddHHmmss
+	 * @return
+	 */
+	public static String getCurrentTime(){
+		String r = "";
+		SimpleDateFormat sdf = new SimpleDateFormat(DEFAULT_PATTERN_2);
+		r = sdf.format(new Date());
+		return r;
+	}
 	
 	/**
 	 * 根据pattern格式化日期
@@ -307,5 +316,7 @@ public class DateUtil {
 		System.out.println(b);
 		System.out.println(minuteInterval(d2,d1));
 		System.out.println(lastDate(d1));
+		
+		System.out.println("===="+getCurrentTime());
 	}
 }
