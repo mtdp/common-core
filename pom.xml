@@ -42,10 +42,12 @@
 	<spring.version>3.0.5.RELEASE</spring.version>
 	<aspectjweaver.version>1.6.9</aspectjweaver.version>
 	<fastjson.version>1.1.22</fastjson.version>
-	<!-- database -->
+	<!-- database cache-->
 	<c3p0.version>0.9.1.2</c3p0.version>
+	<druid.version>1.0.14</druid.version>
 	<mysql.version>5.1.6</mysql.version>
 	<postgresql.version>8.4-702.jdbc4</postgresql.version>
+	<jedis.version>2.1.0</jedis.version>
 	<!-- apache commons -->
 	<apache.beanutils.version>1.8.3</apache.beanutils.version>
 	<apache.codec.version>1.5</apache.codec.version>
@@ -61,59 +63,6 @@
 	<!-- jxls excel导出工具 -->
 	<apache.jxls.version>1.0</apache.jxls.version>
   </properties>
-  <build>
-    <finalName>common-core</finalName>
-    <defaultGoal>install</defaultGoal>
-    <plugins>
-		<!-- compiler插件, 设定JDK版本 -->
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-compiler-plugin</artifactId>
-			<version>${maven.compiler.plugin.version}</version>
-			<configuration>
-				<!--
-					configuration:通常用于私有不开源的plugin,不能够详细了解plugin的内部工作原理，但使plugin满足的properties
-				-->
-				<source>${project.build.jdk.version}</source>
-				<target>${project.build.jdk.version}</target>
-				<encoding>${project.build.sourceEncoding}</encoding>
-			</configuration>
-		</plugin>
-		<!-- test插件 -->
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-surefire-plugin</artifactId>
-			<version>${maven.surefire.plugin.version}</version>
-			<configuration>
-				<argLine>-Dfile.encoding=UTF-8</argLine>
-				<includes>
-					<include implementation="java.lang.String">**/*TestAbstract.class</include>
-					<include implementation="java.lang.String">**/*Test.class</include>
-				</includes>
-			</configuration>
-		</plugin>
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-failsafe-plugin</artifactId>
-			<version>${maven.failsafe.plugin.version}</version>
-			<dependencies>
-				<dependency>
-					<groupId>org.apache.maven.surefire</groupId>
-					<artifactId>surefire-junit47</artifactId>
-					<version>${surefire.junit47.version}</version>
-				</dependency>
-			</dependencies>
-			<executions>
-				<execution>
-					<id>integration-test</id>
-					<goals>
-						<goal>integration-test</goal>
-					</goals>
-				</execution>
-			</executions> 
-		</plugin>
-	</plugins>
-  </build>
 
   <dependencies>
   	<dependency>
@@ -215,6 +164,12 @@
     	<artifactId>c3p0</artifactId>
     	<version>${c3p0.version}</version>
     </dependency>
+    <!-- druid 数据库连接池 -->
+	<dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+        <version>${druid.version}</version>
+    </dependency>
     <dependency>
     	<groupId>mysql</groupId>
     	<artifactId>mysql-connector-java</artifactId>
@@ -225,6 +180,11 @@
 	    <artifactId>postgresql</artifactId> 
 	    <version>${postgresql.version}</version> 
     </dependency> 
+    <dependency>
+	<groupId>redis.clients</groupId>
+		<artifactId>jedis</artifactId>
+		<version>${jedis.version}</version>
+	</dependency>
     <!-- logging -->
     <!-- log4j -->
     <dependency>
@@ -341,4 +301,58 @@
      -->
     
   </dependencies>
+  
+  <build>
+    <finalName>common-core</finalName>
+    <defaultGoal>install</defaultGoal>
+    <plugins>
+		<!-- compiler插件, 设定JDK版本 -->
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>${maven.compiler.plugin.version}</version>
+			<configuration>
+				<!--
+					configuration:通常用于私有不开源的plugin,不能够详细了解plugin的内部工作原理，但使plugin满足的properties
+				-->
+				<source>${project.build.jdk.version}</source>
+				<target>${project.build.jdk.version}</target>
+				<encoding>${project.build.sourceEncoding}</encoding>
+			</configuration>
+		</plugin>
+		<!-- test插件 -->
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<version>${maven.surefire.plugin.version}</version>
+			<configuration>
+				<argLine>-Dfile.encoding=UTF-8</argLine>
+				<includes>
+					<include implementation="java.lang.String">**/*TestAbstract.class</include>
+					<include implementation="java.lang.String">**/*Test.class</include>
+				</includes>
+			</configuration>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-failsafe-plugin</artifactId>
+			<version>${maven.failsafe.plugin.version}</version>
+			<dependencies>
+				<dependency>
+					<groupId>org.apache.maven.surefire</groupId>
+					<artifactId>surefire-junit47</artifactId>
+					<version>${surefire.junit47.version}</version>
+				</dependency>
+			</dependencies>
+			<executions>
+				<execution>
+					<id>integration-test</id>
+					<goals>
+						<goal>integration-test</goal>
+					</goals>
+				</execution>
+			</executions> 
+		</plugin>
+	</plugins>
+  </build>
 </project>
