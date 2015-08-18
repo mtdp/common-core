@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * redis缓存
@@ -29,6 +30,15 @@ public class RedisManager {
 	
 	private static JedisPool jedisPool;
 	
+	private static JedisPoolConfig config;//Jedis客户端池配置
+	 static{
+	        config = new JedisPoolConfig();
+	        config.setMaxActive(1000);//设置最大连接数  
+	        config.setMaxIdle(5); //设置最大空闲数 
+	        config.setMaxWait(5000);//设置超时时间  
+	        config.setTestOnBorrow(true);
+	 }
+	
 	public RedisManager(){
 	}
 	
@@ -50,7 +60,7 @@ public class RedisManager {
 		if(jedisPool != null){
 			return; 
 		}
-		jedisPool = new JedisPool(host, port);
+		jedisPool = new JedisPool(config,host, port);
 	}
 	
 	/**
