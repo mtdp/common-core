@@ -43,7 +43,9 @@ public class RecordMethodExeTimeServiceImpl implements MethodInterceptor {
 			t = t.substring(t.lastIndexOf(".")+1, t.length());
 			params += t +",";
 		}
-		params = params.substring(0, params.length()-1);
+		if(!"".equals(params)){
+			params = params.substring(0, params.length()-1);
+		}
 		logger.info("{} exe time:【{}】ms",clazzName+"."+methodName+"("+params+")",time);
 		return obj;
 	}
