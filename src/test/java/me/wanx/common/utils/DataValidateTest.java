@@ -8,7 +8,7 @@ public class DataValidateTest {
 	
 	public static void main(String[] args) {
 		foo f = new foo("");
-		DataValidateResult r = DataValidateUtil.validata(f);
+		DataValidateResult r = DataValidateUtil.validate(f);
 		System.out.println(r);
 	}
 

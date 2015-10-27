@@ -62,7 +62,8 @@ public class DataValidateUtil {
 				if(propVal == null){
 					sb.append("参数对象[").append(clazzName).append("]的属性[").append(field.getName())
 					.append("]校验失败,不能为NULL");
-					return new DataValidateResult(false,sb.toString());
+					String errorMsg = v.errorMsg();
+					return new DataValidateResult(false,StringUtil.isBlank(errorMsg) ? sb.toString() : errorMsg);
 				}
 			}
 			if(!v.isBlank()){
@@ -70,21 +71,24 @@ public class DataValidateUtil {
 				if(StringUtil.isBlank(propVal.toString())){
 					sb.append("参数对象[").append(clazzName).append("]的属性[").append(field.getName())
 					.append("]校验失败,不能为空字符串");
-					return new DataValidateResult(false, sb.toString());
+					String errorMsg = v.errorMsg();
+					return new DataValidateResult(false,StringUtil.isBlank(errorMsg) ? sb.toString() : errorMsg);
 				}
 			}
 			if(v.minLength() != -1 && v.minLength() > 0 && String.class.equals(propVal.getClass())){
 				if(propVal.toString().length() < v.minLength()){
 					sb.append("参数对象[").append(clazzName).append("]的属性[").append(field.getName())
 					.append("]校验失败,该属性值是[").append(propVal).append("]最小长度不能小于").append(v.minLength());
-					return new DataValidateResult(false, sb.toString());
+					String errorMsg = v.errorMsg();
+					return new DataValidateResult(false,StringUtil.isBlank(errorMsg) ? sb.toString() : errorMsg);
 				}
 			}
 			if(v.maxLength() != -1 && v.maxLength() > 0 && String.class.equals(propVal.getClass())){
 				if(propVal.toString().length() > v.maxLength()){
 					sb.append("参数对象[").append(clazzName).append("]的属性[").append(field.getName())
 					.append("]校验失败,该属性值是[").append(propVal).append("]最小长度不能大于").append(v.maxLength());
-					return new DataValidateResult(false, sb.toString());
+					String errorMsg = v.errorMsg();
+					return new DataValidateResult(false,StringUtil.isBlank(errorMsg) ? sb.toString() : errorMsg);
 				}
 			}
 			//校验正则表达式
@@ -94,7 +98,8 @@ public class DataValidateUtil {
 				if(!matcher.matches()){
 					sb.append("参数对象[").append(clazzName).append("]的属性[").append(field.getName())
 					.append("]校验失败,该属性值是[").append(propVal).append("]校验正则表达式[").append(v.maxLength()).append("]失败");
-					return new DataValidateResult(false, sb.toString());
+					String errorMsg = v.errorMsg();
+					return new DataValidateResult(false,StringUtil.isBlank(errorMsg) ? sb.toString() : errorMsg);
 				}
 			}
 		} catch (IllegalArgumentException e) {
