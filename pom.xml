@@ -32,7 +32,7 @@
 	<jstl.versioin>1.2</jstl.versioin>
 	<standard.versioin>1.1.2</standard.versioin>
 	<!-- logging -->
-	<slf4j.version>1.6.4</slf4j.version>
+	<slf4j.version>1.7.7</slf4j.version>
 	<log4j.version>1.2.12</log4j.version>
 	<!-- dependency version -->
 	<junit.version>4.8.2</junit.version>
@@ -204,6 +204,7 @@
 		<version>${slf4j.version}</version>
 	</dependency>
 	<!-- slf4j绑定log4j实现输出日志 -->
+	<!-- 
 	<dependency>
 		<groupId>org.slf4j</groupId>
 		<artifactId>slf4j-log4j12</artifactId>
@@ -215,11 +216,24 @@
 			</exclusion>
 		</exclusions>
 	</dependency>
+	 -->
     <!-- log4j -->
+    <!-- 
     <dependency>
     	<groupId>log4j</groupId>
     	<artifactId>log4j</artifactId>
     	<version>${log4j.version}</version>
+    </dependency>
+     -->
+    <dependency>
+	   <groupId>org.slf4j</groupId>
+	   <artifactId>log4j-over-slf4j</artifactId>
+       <version>${slf4j.version}</version>
+	</dependency>
+    <dependency>
+    	<groupId>org.slf4j</groupId>
+    	<artifactId>slf4j-simple</artifactId>
+    	<version>${slf4j.version}</version>
     </dependency>
     <!-- end logging -->
     
