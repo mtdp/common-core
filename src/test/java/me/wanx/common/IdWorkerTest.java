@@ -2,11 +2,14 @@ package me.wanx.common;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.TimeUnit;
 
+import me.wanx.common.core.service.ILoggerAdapter;
+import me.wanx.common.core.service.LoggerAdapterDefaultImpl;
 import me.wanx.common.core.utils.IdWorker;
 
-public class IdWorkerTest { 
+public class IdWorkerTest {
+	
+	ILoggerAdapter logger = new LoggerAdapterDefaultImpl(IdWorkerTest.class);
 	
     public static void main(String []args){ 
         IdWorkerTest test = new IdWorkerTest(); 
@@ -21,21 +24,24 @@ public class IdWorkerTest {
             new Thread(new Runnable() { 
                 @Override 
                 public void run() { 
-                try { 
-                    cdl.await(); 
-                } catch (InterruptedException e) { 
-                    e.printStackTrace(); 
-                } catch (BrokenBarrierException e) { 
-                    e.printStackTrace(); 
+	                try { 
+	                    cdl.await(); 
+	                } catch (InterruptedException e) { 
+	        			Thread.currentThread().interrupt();
+	                    e.printStackTrace(); 
+	                } catch (BrokenBarrierException e) { 
+	                    e.printStackTrace(); 
+	                } 
+	                logger.info(w.nextId()+"");
                 } 
-                System.out.println(w.nextId());} 
              }).start(); 
         } 
-        try { 
-            TimeUnit.SECONDS.sleep(5); 
-        } catch (InterruptedException e) { 
-           e.printStackTrace(); 
-        } 
+        try {
+			Thread.currentThread().join();
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+			e.printStackTrace();
+		}
 
     } 
 }
