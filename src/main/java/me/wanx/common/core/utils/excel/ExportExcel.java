@@ -22,6 +22,16 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.util.ReflectionUtils;
 
+/**
+ * 
+* @ClassName: ExportExcel 
+* @Description: 数据导出excel工具类
+* 				 配合 ExcelField注解使用 
+* @author gqwang
+* @date 2015年11月13日 下午2:55:52 
+* 
+* @param <T>
+ */
 public class ExportExcel<T> {
 
 	Map<String, ExcelField> fieldMap = new HashMap<String, ExcelField>();
@@ -218,6 +228,7 @@ public class ExportExcel<T> {
 		return fields;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private Collection<Object> getCollectionValues(Object obj) {
 		if (null == obj) {
 			return null;
