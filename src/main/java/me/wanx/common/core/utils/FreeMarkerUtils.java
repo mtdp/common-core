@@ -63,6 +63,9 @@ public class FreeMarkerUtils {
 		String templateTxt = "test template value is ${test}";
 		String r = getMessgae(map, templateTxt);
 		logger.info("-----------------r="+r);
+		map.put("test", "测试中文");
+		r = getMessgae(map, templateTxt);
+		logger.info("-----------------r="+r);
 	}
 	
 }
